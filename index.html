@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+<script>
+
+let playerCount = 0;
+let computerCount = 0;
+
+let computerPlay = () => {
+    const possibleSelections = ['Rock', 'Paper', 'Scissors'];
+
+    let randomNumber = Math.floor(Math.random() * 3);
+
+    return (possibleSelections[randomNumber]);
+};
+
+let playRound = (playerSelection, computerSelection) => {
+
+    if(playerSelection.toLowerCase() ==  computerSelection.toLowerCase()){
+        return "Draw";
+    } else if(playerSelection.toLowerCase() == 'rock' &&  computerSelection == 'Paper'){
+        computerCount += 1;
+        return "You Lose! Paper beats Rock";
+    } else if(playerSelection.toLowerCase() == 'rock' &&  computerSelection == 'Scissors'){
+        playerCount += 1;
+        return "You Win! Rock beats Scissors";
+    } else if(playerSelection.toLowerCase() == 'paper' &&  computerSelection == 'Rock'){
+        playerCount += 1;
+        return "You Win! Paper beats Rock";
+    } else if(playerSelection.toLowerCase() == 'paper' &&  computerSelection == 'Scissors'){
+        computerCount += 1;
+        return "You Lose! Scissors beats paper";
+    } else if(playerSelection.toLowerCase() == 'scissors' &&  computerSelection == 'Rock'){
+        computerCount += 1;
+        return "You Lose! Rock beats Scissors";
+    } else if(playerSelection.toLowerCase() == 'scissors' &&  computerSelection == 'Paper'){
+        playerCount += 1;
+        return "You Win! Scissors beats Paper";
+    };
+};
+
+
+
+const game = () => {
+
+    let playerSelection = window.prompt('1/5 make your play. rock, paper or scissors?');
+    let computerSelection = computerPlay();
+    alert(computerSelection);
+    alert(playRound(playerSelection, computerSelection));
+
+    playerSelection = window.prompt('2/5 make your play. rock, paper or scissors?');
+    computerSelection = computerPlay();
+    alert(computerSelection);
+    alert(playRound(playerSelection, computerSelection));
+
+    playerSelection = window.prompt('3/5 make your play. rock, paper or scissors?');
+    computerSelection = computerPlay();
+    alert(computerSelection);
+    alert(playRound(playerSelection, computerSelection));
+
+    playerSelection = window.prompt('4/5 make your play. rock, paper or scissors?');
+    computerSelection = computerPlay();
+    alert(computerSelection);
+    alert(playRound(playerSelection, computerSelection));
+
+    playerSelection = window.prompt('5/5 make your play. rock, paper or scissors?');
+    alert(computerSelection);
+    alert(playRound(playerSelection, computerSelection));
+
+    if(playerCount > computerCount){
+        alert('You Win!');
+        alert(playerCount);
+        alert(computerCount);
+    } else if (computerCount > playerCount){
+        alert('You Lose!');
+        alert(playerCount);
+        alert(computerCount);
+    } else {
+        alert("It's a draw");
+        alert(playerCount);
+        alert(computerCount);
+    };
+};
+
+game();
+
+</script>
+</body>
+<html>

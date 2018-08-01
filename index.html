@@ -42,10 +42,8 @@ let playRound = (playerSelection, computerSelection) => {
     };
 };
 
-
-
 const game = () => {
-
+ 
     let playerSelection = window.prompt('1/5 make your play. rock, paper or scissors?');
     let computerSelection = computerPlay();
     alert(computerSelection);
@@ -72,16 +70,16 @@ const game = () => {
 
     if(playerCount > computerCount){
         alert('You Win!');
-        alert(playerCount);
-        alert(computerCount);
+        alert(`player score ${playerCount}`);
+        alert(`computer score ${computerCount}`);
     } else if (computerCount > playerCount){
         alert('You Lose!');
-        alert(playerCount);
-        alert(computerCount);
+        alert(`player score ${playerCount}`);
+        alert(`computer score ${computerCount}`);
     } else {
         alert("It's a draw");
-        alert(playerCount);
-        alert(computerCount);
+        alert(`player score ${playerCount}`);
+        alert(`computer score ${computerCount}`);
     };
 };
 

@@ -4,10 +4,50 @@
     <title>Rock Paper Scissors</title>
 </head>
 <body>
+<div class="container">
+    <h2>Rock Paper Scissors</h2>
+    <p>Someboy has to take out the trash.  Let's decide who</p>
+    <br/>
+    <div class="buttons">
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
+    </div>
+    <div>
+        <h3 id="scoreboard">Scoreboard</h3>
+        <div class="playerPick">
+            <p>Player Picks: </p>
+            <p id="playerPick"></p>
+        </div>
+        <div class="computerPick">
+            <p>Computer Picks: </p>
+            <p id="computerPick"></p>
+        </div>
+        <div class="round">
+            <p>Round Result: </p>
+            <p id="round"></p>
+        </div>
+        <div class="player">
+            <p>Player Score: </p>
+            <p id="player"></p>
+        </div>
+        <div class="computer">
+            <p>Computer Score: </p>
+            <p id="computer"></p>
+        </div>
+    </div>
+</div>
 <script>
 
 let playerCount = 0;
 let computerCount = 0;
+
+const player = document.querySelector('#player');
+const computer = document.querySelector('#computer');
+const round = document.querySelector('#round');
+const computerPick = document.querySelector('#computerPick');
+const playerPick = document.querySelector('#playerPick');
+
 
 let computerPlay = () => {
     const possibleSelections = ['Rock', 'Paper', 'Scissors'];
@@ -19,71 +59,57 @@ let computerPlay = () => {
 
 let playRound = (playerSelection, computerSelection) => {
 
+    let roundResult = "";
+
     if(playerSelection.toLowerCase() ==  computerSelection.toLowerCase()){
-        return "Draw";
+        roundResult = "Draw";
     } else if(playerSelection.toLowerCase() == 'rock' &&  computerSelection == 'Paper'){
         computerCount += 1;
-        return "You Lose! Paper beats Rock";
+        roundResult = "You Lose! Paper beats Rock";
     } else if(playerSelection.toLowerCase() == 'rock' &&  computerSelection == 'Scissors'){
         playerCount += 1;
-        return "You Win! Rock beats Scissors";
+        roundResult = "You Win! Rock beats Scissors";
     } else if(playerSelection.toLowerCase() == 'paper' &&  computerSelection == 'Rock'){
         playerCount += 1;
-        return "You Win! Paper beats Rock";
+        roundResult = "You Win! Paper beats Rock";
     } else if(playerSelection.toLowerCase() == 'paper' &&  computerSelection == 'Scissors'){
         computerCount += 1;
-        return "You Lose! Scissors beats paper";
+        roundResult = "You Lose! Scissors beats paper";
     } else if(playerSelection.toLowerCase() == 'scissors' &&  computerSelection == 'Rock'){
         computerCount += 1;
-        return "You Lose! Rock beats Scissors";
+        roundResult = "You Lose! Rock beats Scissors";
     } else if(playerSelection.toLowerCase() == 'scissors' &&  computerSelection == 'Paper'){
         playerCount += 1;
-        return "You Win! Scissors beats Paper";
+        roundResult = "You Win! Scissors beats Paper";
     };
+
+    player.textContent = `${playerCount}`;
+    computer.textContent = `${computerCount}`;
+    round.textContent = `${roundResult}`;
+
+    if(playerCount == 5){
+        player.textContent = 'Winner!';
+        computer.textContent = 'Loser!';
+    } else if(computerCount == 5){
+        player.textContent = 'Winner!';
+        computer.textContent = 'Loser!';
+    }
 };
 
-const game = () => {
- 
-    let playerSelection = window.prompt('1/5 make your play. rock, paper or scissors?');
-    let computerSelection = computerPlay();
-    alert(computerSelection);
-    alert(playRound(playerSelection, computerSelection));
+const buttons = document.querySelectorAll('button');
 
-    playerSelection = window.prompt('2/5 make your play. rock, paper or scissors?');
+// we use the .forEach method to iterate through each button
+buttons.forEach((button) => {
+
+  button.addEventListener('click', (e) => {
+    playerSelection = button.id;
     computerSelection = computerPlay();
-    alert(computerSelection);
-    alert(playRound(playerSelection, computerSelection));
+    playerPick.textContent = `${playerSelection}`;
+    computerPick.textContent = `${computerSelection}`;
+    playRound(playerSelection, computerSelection);
+  });
 
-    playerSelection = window.prompt('3/5 make your play. rock, paper or scissors?');
-    computerSelection = computerPlay();
-    alert(computerSelection);
-    alert(playRound(playerSelection, computerSelection));
-
-    playerSelection = window.prompt('4/5 make your play. rock, paper or scissors?');
-    computerSelection = computerPlay();
-    alert(computerSelection);
-    alert(playRound(playerSelection, computerSelection));
-
-    playerSelection = window.prompt('5/5 make your play. rock, paper or scissors?');
-    alert(computerSelection);
-    alert(playRound(playerSelection, computerSelection));
-
-    if(playerCount > computerCount){
-        alert('You Win!');
-        alert(`player score ${playerCount}`);
-        alert(`computer score ${computerCount}`);
-    } else if (computerCount > playerCount){
-        alert('You Lose!');
-        alert(`player score ${playerCount}`);
-        alert(`computer score ${computerCount}`);
-    } else {
-        alert("It's a draw");
-        alert(`player score ${playerCount}`);
-        alert(`computer score ${computerCount}`);
-    };
-};
-
-game();
+});
 
 </script>
 </body>
